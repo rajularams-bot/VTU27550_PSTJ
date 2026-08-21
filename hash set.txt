@@ -1,0 +1,52 @@
+import java.util.*;
+
+public class Solution {
+
+    static class Pair {
+        String first;
+        String second;
+
+        Pair(String first, String second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+
+            if (!(obj instanceof Pair)) {
+                return false;
+            }
+
+            Pair p = (Pair) obj;
+            return first.equals(p.first) && second.equals(p.second);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(first, second);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int t = sc.nextInt();
+
+        Set<Pair> set = new HashSet<>();
+
+        while (t-- > 0) {
+            String first = sc.next();
+            String second = sc.next();
+
+            set.add(new Pair(first, second));
+
+            System.out.println(set.size());
+        }
+
+        sc.close();
+    }
+}
