@@ -1,0 +1,74 @@
+import java.util.*;
+
+interface PerformOperation {
+    boolean check(int a);
+}
+
+class MyMath {
+
+    public static PerformOperation isOdd() {
+        return (int a) -> a % 2 != 0;
+    }
+
+    public static PerformOperation isPrime() {
+        return (int a) -> {
+            if (a <= 1) {
+                return false;
+            }
+
+            for (int i = 2; i <= Math.sqrt(a); i++) {
+                if (a % i == 0) {
+                    return false;
+                }
+            }
+
+            return true;
+        };
+    }
+
+    public static PerformOperation isPalindrome() {
+        return (int a) -> {
+            int original = a;
+            int reverse = 0;
+
+            while (a > 0) {
+                int digit = a % 10;
+                reverse = reverse * 10 + digit;
+                a /= 10;
+            }
+
+            return original == reverse;
+        };
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+
+        int t = scan.nextInt();
+
+        while (t-- > 0) {
+            int condition = scan.nextInt();
+            int number = scan.nextInt();
+
+            if (condition == 1) {
+                System.out.println(
+                    MyMath.isOdd().check(number) ? "ODD" : "EVEN"
+                );
+            } 
+            else if (condition == 2) {
+                System.out.println(
+                    MyMath.isPrime().check(number) ? "PRIME" : "COMPOSITE"
+                );
+            } 
+            else if (condition == 3) {
+                System.out.println(
+                    MyMath.isPalindrome().check(number) ? "PALINDROME" : "NOT PALINDROME"
+                );
+            }
+        }
+
+        scan.close();
+    }
+}
